@@ -7,10 +7,10 @@
 radius = 16.0
 height = 44.0
 
-[node name="Boulder" type="CharacterBody2D"]
+[node name="Boulder" type="StaticBody2D"]
 collision_layer = 3
-motion_mode = 1
 script = ExtResource("1_7lox5")
+metadata/_custom_type_script = "uid://crvvmruyaiiv2"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_475t6")
