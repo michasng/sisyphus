@@ -10,6 +10,10 @@ func _on_player_moved(velocity: Vector2, is_pushing: bool) -> void:
 
 	if velocity == Vector2.ZERO:
 		stop()
+		# Stop on the last frame, because I've made the last frames look idle
+		# so the first frame is always in movement.
+		# Otherwise the player appears to slide while an animation starts.
+		frame = sprite_frames.get_frame_count(animation) - 1
 		return
 
 	flip_h = velocity.y == 0 and velocity.x > 0
