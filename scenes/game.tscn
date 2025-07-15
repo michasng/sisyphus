@@ -63,3 +63,5 @@ position = Vector2(80, 93)
 
 [node name="Boulder" parent="." instance=ExtResource("3_lbhrr")]
 position = Vector2(81, 57)
+
+[connection signal="moved" from="Player" to="Boulder" method="_on_player_moved"]

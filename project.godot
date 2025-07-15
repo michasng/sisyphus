@@ -70,6 +70,7 @@ down={
 [layer_names]
 
 2d_physics/layer_1="solid"
+2d_physics/layer_2="boulder"
 
 [rendering]
 

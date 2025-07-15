@@ -143,6 +143,7 @@ animations = [{
 radius = 5.0
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -155,5 +156,9 @@ position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_3vyb7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="BoulderRayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -1.5)
+collision_mask = 2
 
 [connection signal="moved" from="." to="AnimatedSprite2D" method="_on_player_moved"]
