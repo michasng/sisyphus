@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl4iogqfx24e5"]
+
+[ext_resource type="Texture2D" uid="uid://badvcn06a66e6" path="res://textures/boulder.png" id="1_475t6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7lox5"]
+radius = 16.0
+height = 44.0
+
+[node name="Boulder" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_475t6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_7lox5")
