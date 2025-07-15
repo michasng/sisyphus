@@ -7,6 +7,7 @@ extends StaticBody2D
 @onready var max_roll_velocity_pixels_per_second := 2.95 * Game.TILE_SIZE_PIXELS
 @onready var roll_acceleration_pixels_per_second_squared := 2.0
 @onready var idle_to_roll_duration_seconds := 1.0
+@onready var stop_roll_y := 0.0
 
 # in pixels per second, consistent with CharacterBody2D.velocity
 var velocity := Vector2.ZERO
@@ -26,13 +27,30 @@ var state := State.IDLE:
 
 func _physics_process(delta: float) -> void:
 	# mind the order: transition states before handling physics
-	if state == State.IDLE and state_timer_seconds >= idle_to_roll_duration_seconds:
-		state = State.ROLLING
-	
+	_transition_states()
+	_handle_physics(delta)
+	state_timer_seconds += delta
+
+
+func _transition_states() -> void:
+	var should_stop_roll := position.y >= stop_roll_y
+	match state:
+		State.IDLE:
+			if should_stop_roll:
+				return
+			if state_timer_seconds >= idle_to_roll_duration_seconds:
+				state = State.ROLLING
+		State.ROLLING:
+			if should_stop_roll:
+				state = State.IDLE
+		State.PUSHED:
+			pass # PUSHED transitions are handled by _on_player_moved
+
+
+func _handle_physics(delta: float) -> void:
 	match state:
 		State.IDLE:
 			velocity = Vector2.ZERO
-			
 		State.PUSHED:
 			velocity = Vector2(0, -push_velocity_pixels_per_second)
 		State.ROLLING:
@@ -47,8 +65,6 @@ func _physics_process(delta: float) -> void:
 
 	# unlike move_and_slide, delta is not applied internally
 	move_and_collide(velocity * delta)
-	
-	state_timer_seconds += delta
 
 
 func _on_player_moved(_velocity: Vector2, is_pushing: bool) -> void:
