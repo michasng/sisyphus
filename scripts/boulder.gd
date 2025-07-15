@@ -1,17 +1,6 @@
 class_name Boulder
 extends StaticBody2D
 
-
-@onready var push_velocity_pixels_per_second := 0.5 * Game.TILE_SIZE_PIXELS
-# nearly as fast as the player can walk
-@onready var max_roll_velocity_pixels_per_second := 2.95 * Game.TILE_SIZE_PIXELS
-@onready var roll_acceleration_pixels_per_second_squared := 2.0
-@onready var idle_to_roll_duration_seconds := 1.0
-@onready var stop_roll_y := 0.0
-
-# in pixels per second, consistent with CharacterBody2D.velocity
-var velocity := Vector2.ZERO
-
 enum State {
 	IDLE,
 	PUSHED,
@@ -19,10 +8,19 @@ enum State {
 }
 
 var state_timer_seconds := 0.0
-var state := State.IDLE:
+@export var state := State.IDLE:
 	set(value):
 		state = value
 		state_timer_seconds = 0.0
+# in pixels per second, consistent with CharacterBody2D.velocity
+@export var velocity := Vector2.ZERO
+
+@onready var push_velocity_pixels_per_second := 0.5 * Game.TILE_SIZE_PIXELS
+# nearly as fast as the player can walk
+@onready var max_roll_velocity_pixels_per_second := 2.95 * Game.TILE_SIZE_PIXELS
+@onready var roll_acceleration_pixels_per_second_squared := 2.0
+@onready var idle_to_roll_duration_seconds := 1.0
+@onready var stop_roll_y := 0.0
 
 
 func _physics_process(delta: float) -> void:
