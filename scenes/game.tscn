@@ -40,7 +40,7 @@ position = Vector2(0, 48)
 [node name="Boulder" parent="YSorted" node_paths=PackedStringArray("player") instance=ExtResource("3_lbhrr")]
 position = Vector2(0, -160)
 state = 2
-velocity = Vector2(0, 64)
+velocity = Vector2(0, 56)
 player = NodePath("../Player")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]

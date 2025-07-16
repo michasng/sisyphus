@@ -1,5 +1,5 @@
 class_name Boulder
-extends StaticBody2D
+extends AnimatableBody2D
 
 enum State {
 	IDLE,
@@ -12,16 +12,19 @@ var state_timer_seconds := 0.0
 	set(value):
 		state = value
 		state_timer_seconds = 0.0
+
 # in pixels per second, consistent with CharacterBody2D.velocity
 @export var velocity := Vector2.ZERO
-@export var player: Player
-
-@onready var push_velocity_pixels_per_second := 0.5 * Game.TILE_SIZE_PIXELS
+@export var max_push_velocity_pixels_per_second := 1.5 * Game.TILE_SIZE_PIXELS
 # nearly as fast as the player can walk
-@onready var max_roll_velocity_pixels_per_second := 3.5 * Game.TILE_SIZE_PIXELS
-@onready var roll_acceleration_pixels_per_second_squared := 5.0
-@onready var idle_to_roll_duration_seconds := 1.0
-@onready var stop_roll_y := 0.0
+@export var max_roll_velocity_pixels_per_second := 3.5 * Game.TILE_SIZE_PIXELS
+@export var idle_to_roll_duration_seconds := 1.0
+@export var acceleration_seconds := 5.0
+@export var stop_roll_y := 0.0
+
+@onready var acceleration_pixels_per_second_squared := max_roll_velocity_pixels_per_second / acceleration_seconds
+
+@export var player: Player
 
 
 func _physics_process(delta: float) -> void:
@@ -55,20 +58,26 @@ func _handle_physics(delta: float) -> void:
 		State.IDLE:
 			velocity = Vector2.ZERO
 		State.PUSH:
-			velocity = Vector2(0, -push_velocity_pixels_per_second)
-		State.ROLL:
 			velocity = Vector2(
 				0,
 				move_toward(
 					velocity.y,
-					max_roll_velocity_pixels_per_second,
-					roll_acceleration_pixels_per_second_squared * delta
+					-max_push_velocity_pixels_per_second,
+					acceleration_pixels_per_second_squared * delta,
 				)
 			)
+		State.ROLL:
+			if player.blocks_boulder:
+				velocity = Vector2.ZERO
+			else:
+				velocity = Vector2(
+					0,
+					move_toward(
+						velocity.y,
+						max_roll_velocity_pixels_per_second,
+						acceleration_pixels_per_second_squared * delta
+					)
+				)
 
-	var position_before = position
-	# unlike move_and_slide, delta is not applied internally
-	move_and_collide(velocity * delta)
-	# move_and_slide would usually also update the velocity
-	# depending on how far the character actually moved
-	velocity = (position - position_before) / delta
+	# unlike CharacterBody2D.move_and_slide, delta needs to be applied
+	position += velocity * delta

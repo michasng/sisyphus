@@ -18,11 +18,14 @@ enum State {
 @export var push_stamina_consumption_per_second := 0.5
 @export var sprint_stamina_consumption_per_second := 0.5
 
-@onready var boulder_ray_cast: RayCast2D = $BoulderRayCast2D
-
 var stamina: float = max_stamina:
 	set(value):
 		stamina = value
+
+@onready var _boulder_ray_cast: RayCast2D = $BoulderRayCast2D
+var blocks_boulder: bool:
+	get:
+		return _boulder_ray_cast.is_colliding()
 
 
 func _physics_process(delta: float) -> void:
@@ -38,7 +41,7 @@ func _transition_states() -> void:
 		return
 
 	var input_direction = _get_input_direction()
-	if input_direction.angle() == Vector2.UP.angle() and boulder_ray_cast.is_colliding():
+	if input_direction.angle() == Vector2.UP.angle() and blocks_boulder:
 		state = State.PUSH
 	elif input_direction:
 		if Input.is_action_pressed("sprint"):
