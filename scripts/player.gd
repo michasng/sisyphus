@@ -12,7 +12,7 @@ enum State {
 @export var state := State.IDLE
 
 @export var walk_velocity_pixels_per_second := 3.0 * Game.TILE_SIZE_PIXELS
-@export var sprint_velocity_pixels_per_second := 4.0 * Game.TILE_SIZE_PIXELS
+@export var sprint_velocity_pixels_per_second := 4.5 * Game.TILE_SIZE_PIXELS
 @export var max_stamina := 3
 @export var stamina_recharge_per_second := 0.5
 @export var push_stamina_consumption_per_second := 0.5
