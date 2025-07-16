@@ -66,5 +66,9 @@ func _handle_physics(delta: float) -> void:
 				)
 			)
 
+	var position_before = position
 	# unlike move_and_slide, delta is not applied internally
 	move_and_collide(velocity * delta)
+	# move_and_slide would usually also update the velocity
+	# depending on how far the character actually moved
+	velocity = (position - position_before) / delta
