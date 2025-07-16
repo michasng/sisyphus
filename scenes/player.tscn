@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://copx3gyi50kxw"]
+[gd_scene load_steps=26 format=3 uid="uid://copx3gyi50kxw"]
 
 [ext_resource type="Texture2D" uid="uid://sb0fqrpnaocr" path="res://textures/sisyphos.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dxsocwil37nq0" path="res://scripts/player.gd" id="1_g2els"]
@@ -19,6 +19,22 @@ region = Rect2(96, 32, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
 atlas = ExtResource("1_3vyb7")
 region = Rect2(112, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(128, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4r5pv"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(144, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60mlk"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(160, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4ail"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(176, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
 atlas = ExtResource("1_3vyb7")
@@ -89,6 +105,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fulsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r5pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60mlk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4ail")
+}],
+"loop": true,
+"name": &"rest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_tuyoq")
 }, {
 "duration": 1.0,
@@ -146,10 +179,12 @@ radius = 5.0
 motion_mode = 1
 script = ExtResource("1_g2els")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
 sprite_frames = SubResource("SpriteFrames_fulsm")
 animation = &"walk_up"
+frame = 3
 script = ExtResource("3_qhqgy")
+player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -158,5 +193,3 @@ shape = SubResource("CircleShape2D_3vyb7")
 [node name="BoulderRayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, -1.5)
 collision_mask = 2
-
-[connection signal="moved" from="." to="AnimatedSprite2D" method="_on_player_moved"]

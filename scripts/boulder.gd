@@ -3,8 +3,8 @@ extends StaticBody2D
 
 enum State {
 	IDLE,
-	PUSHED,
-	ROLLING,
+	PUSH,
+	ROLL,
 }
 
 var state_timer_seconds := 0.0
@@ -14,6 +14,7 @@ var state_timer_seconds := 0.0
 		state_timer_seconds = 0.0
 # in pixels per second, consistent with CharacterBody2D.velocity
 @export var velocity := Vector2.ZERO
+@export var player: Player
 
 @onready var push_velocity_pixels_per_second := 0.5 * Game.TILE_SIZE_PIXELS
 # nearly as fast as the player can walk
@@ -31,27 +32,31 @@ func _physics_process(delta: float) -> void:
 
 
 func _transition_states() -> void:
+	if player.state == Player.State.PUSH:
+		state = State.PUSH
+		return
+	
 	var should_stop_roll := position.y >= stop_roll_y
 	match state:
 		State.IDLE:
 			if should_stop_roll:
 				return
 			if state_timer_seconds >= idle_to_roll_duration_seconds:
-				state = State.ROLLING
-		State.ROLLING:
+				state = State.ROLL
+		State.ROLL:
 			if should_stop_roll:
 				state = State.IDLE
-		State.PUSHED:
-			pass # PUSHED transitions are handled by _on_player_moved
+		State.PUSH:
+			state = State.IDLE
 
 
 func _handle_physics(delta: float) -> void:
 	match state:
 		State.IDLE:
 			velocity = Vector2.ZERO
-		State.PUSHED:
+		State.PUSH:
 			velocity = Vector2(0, -push_velocity_pixels_per_second)
-		State.ROLLING:
+		State.ROLL:
 			velocity = Vector2(
 				0,
 				move_toward(
@@ -63,10 +68,3 @@ func _handle_physics(delta: float) -> void:
 
 	# unlike move_and_slide, delta is not applied internally
 	move_and_collide(velocity * delta)
-
-
-func _on_player_moved(_velocity: Vector2, is_pushing: bool) -> void:
-	if is_pushing:
-		state = State.PUSHED
-	elif state == State.PUSHED:
-		state = State.IDLE

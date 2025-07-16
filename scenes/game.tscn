@@ -1,17 +1,27 @@
-[gd_scene load_steps=6 format=4 uid="uid://un81rc8dqj2"]
+[gd_scene load_steps=11 format=4 uid="uid://un81rc8dqj2"]
 
 [ext_resource type="Script" uid="uid://dvuowjoy50k4b" path="res://scripts/game.gd" id="1_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://textures/tileset.png" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://copx3gyi50kxw" path="res://scenes/player.tscn" id="2_lnu2h"]
 [ext_resource type="TileSet" uid="uid://b8puki4iqg5tc" path="res://resources/tile_set.tres" id="3_iywne"]
 [ext_resource type="PackedScene" uid="uid://dl4iogqfx24e5" path="res://scenes/boulder.tscn" id="3_lbhrr"]
 [ext_resource type="Script" uid="uid://bbbvp2jq4pcrw" path="res://scripts/game_camera.gd" id="5_iywne"]
+[ext_resource type="Script" uid="uid://df1tsxh51cse6" path="res://scripts/heads_up_display.gd" id="6_u5sy4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5sy4"]
+atlas = ExtResource("1_uwrxv")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gee14"]
+atlas = ExtResource("1_uwrxv")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tnpc"]
+atlas = ExtResource("1_uwrxv")
+region = Rect2(32, 48, 16, 16)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lbhrr")
-
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
-script = ExtResource("5_iywne")
-target = NodePath("../YSorted/Player")
 
 [node name="ObjectsTileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD5/wQAAAAHAAEAAAD5/wMAAAAHAAEAAAD5/wIAAAAHAAEAAAD5/wEAAAAHAAEAAAD5/wAAAAAHAAEAAAD5////AAAHAAEAAAD5//7/AAAHAAEAAAD5//3/AAAHAAEAAAD5//z/AAAHAAEAAAD5//v/AAAHAAEAAAD5/wUAAAAHAAEAAAD6/wUAAAAHAAEAAAD7/wUAAAAHAAEAAAD8/wUAAAAHAAEAAAD9/wUAAAAHAAEAAAD+/wUAAAAHAAEAAAD//wUAAAAHAAEAAAAAAAUAAAAHAAEAAAABAAUAAAAHAAEAAAACAAUAAAAHAAEAAAADAAUAAAAHAAEAAAAEAAUAAAAHAAEAAAAFAAUAAAAHAAEAAAAGAAUAAAAHAAEAAAAGAAQAAAAHAAEAAAAGAAMAAAAHAAEAAAAGAAIAAAAHAAEAAAAGAAEAAAAHAAEAAAAGAAAAAAAHAAEAAAAGAP//AAAHAAEAAAAGAP7/AAAHAAEAAAAGAP3/AAAHAAEAAAAGAPz/AAAHAAEAAAAGAPv/AAAHAAEAAAAGAPr/AAAHAAEAAAAGAPn/AAAHAAEAAAAGAPj/AAAHAAEAAAAGAPf/AAAHAAEAAAAGAPb/AAAHAAEAAAD5//r/AAAHAAEAAAD5//n/AAAHAAEAAAD5//j/AAAHAAEAAAD5//f/AAAHAAEAAAD5//b/AAAHAAEAAAA=")
@@ -27,9 +37,36 @@ y_sort_enabled = true
 [node name="Player" parent="YSorted" instance=ExtResource("2_lnu2h")]
 position = Vector2(0, 48)
 
-[node name="Boulder" parent="YSorted" instance=ExtResource("3_lbhrr")]
+[node name="Boulder" parent="YSorted" node_paths=PackedStringArray("player") instance=ExtResource("3_lbhrr")]
 position = Vector2(0, -160)
 state = 2
 velocity = Vector2(0, 64)
+player = NodePath("../Player")
 
-[connection signal="moved" from="YSorted/Player" to="YSorted/Boulder" method="_on_player_moved"]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("5_iywne")
+target = NodePath("../YSorted/Player")
+
+[node name="HeadsUpDisplay" type="Control" parent="Camera2D" node_paths=PackedStringArray("player")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -80.0
+offset_right = 96.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_u5sy4")
+player = NodePath("../../YSorted/Player")
+full_stamina_icon = SubResource("AtlasTexture_u5sy4")
+half_stamina_icon = SubResource("AtlasTexture_gee14")
+empty_stamina_icon = SubResource("AtlasTexture_0tnpc")
+
+[node name="StaminaContainer" type="HBoxContainer" parent="Camera2D/HeadsUpDisplay"]
+layout_mode = 1
+offset_right = 16.0
+offset_bottom = 16.0
