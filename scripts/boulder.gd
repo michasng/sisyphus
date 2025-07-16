@@ -18,8 +18,8 @@ var state_timer_seconds := 0.0
 
 @onready var push_velocity_pixels_per_second := 0.5 * Game.TILE_SIZE_PIXELS
 # nearly as fast as the player can walk
-@onready var max_roll_velocity_pixels_per_second := 2.95 * Game.TILE_SIZE_PIXELS
-@onready var roll_acceleration_pixels_per_second_squared := 2.0
+@onready var max_roll_velocity_pixels_per_second := 3.5 * Game.TILE_SIZE_PIXELS
+@onready var roll_acceleration_pixels_per_second_squared := 5.0
 @onready var idle_to_roll_duration_seconds := 1.0
 @onready var stop_roll_y := 0.0
 

@@ -15,18 +15,24 @@ func _process(_delta: float) -> void:
 			# Otherwise the player appears to slide while an animation starts.
 			frame = sprite_frames.get_frame_count(animation) - 1
 		Player.State.WALK:
-			if player.velocity.y < 0:
-				play("walk_up")
-			elif player.velocity.y > 0:
-				play("walk_down")
-			elif player.velocity.x < 0:
-				play("walk_left")
-			elif player.velocity.x > 0:
-				play("walk_left")
-			flip_h = player.velocity.y == 0 and player.velocity.x > 0
+			_play_walk_animations()
+		Player.State.SPRINT:
+			_play_walk_animations(1.5)
 		Player.State.PUSH:
 			play("push_up")
 			flip_h = false
 		Player.State.REST:
 			play("rest")
 			flip_h = false
+
+
+func _play_walk_animations(speed: float = 1.0) -> void:
+	if player.velocity.y < 0:
+		play("walk_up", speed)
+	elif player.velocity.y > 0:
+		play("walk_down", speed)
+	elif player.velocity.x < 0:
+		play("walk_left", speed)
+	elif player.velocity.x > 0:
+		play("walk_left", speed)
+	flip_h = player.velocity.y == 0 and player.velocity.x > 0
