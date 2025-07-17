@@ -23,9 +23,6 @@ var stamina: float = max_stamina:
 		stamina = value
 
 @onready var _boulder_ray_cast: RayCast2D = $BoulderRayCast2D
-var blocks_boulder: bool:
-	get:
-		return _boulder_ray_cast.is_colliding()
 
 
 func _physics_process(delta: float) -> void:
@@ -41,7 +38,7 @@ func _transition_states() -> void:
 		return
 
 	var input_direction = _get_input_direction()
-	if input_direction.angle() == Vector2.UP.angle() and blocks_boulder:
+	if input_direction.angle() == Vector2.UP.angle() and _boulder_ray_cast.is_colliding():
 		state = State.PUSH
 	elif input_direction:
 		if Input.is_action_pressed("sprint"):

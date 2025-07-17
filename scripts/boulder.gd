@@ -1,5 +1,5 @@
 class_name Boulder
-extends AnimatableBody2D
+extends CharacterBody2D
 
 enum State {
 	IDLE,
@@ -13,8 +13,6 @@ var state_timer_seconds := 0.0
 		state = value
 		state_timer_seconds = 0.0
 
-# in pixels per second, consistent with CharacterBody2D.velocity
-@export var velocity := Vector2.ZERO
 @export var max_push_velocity_pixels_per_second := 1.5 * Game.TILE_SIZE_PIXELS
 # nearly as fast as the player can walk
 @export var max_roll_velocity_pixels_per_second := 3.5 * Game.TILE_SIZE_PIXELS
@@ -67,17 +65,21 @@ func _handle_physics(delta: float) -> void:
 				)
 			)
 		State.ROLL:
-			if player.blocks_boulder:
-				velocity = Vector2.ZERO
-			else:
-				velocity = Vector2(
-					0,
-					move_toward(
-						velocity.y,
-						max_roll_velocity_pixels_per_second,
-						acceleration_pixels_per_second_squared * delta
-					)
+			velocity = Vector2(
+				0,
+				move_toward(
+					velocity.y,
+					max_roll_velocity_pixels_per_second,
+					acceleration_pixels_per_second_squared * delta
 				)
+			)
 
-	# unlike CharacterBody2D.move_and_slide, delta needs to be applied
-	position += velocity * delta
+	# Only test for collisions instead of letting Godot handle them,
+	# or else other bodies can push this one.
+	# Unlike move_and_slide, delta needs to be applied
+	# and velocity needs to be updated manually.
+	var collision = move_and_collide(velocity * delta, true)
+	if collision:
+		velocity = Vector2.ZERO
+	else:
+		position += velocity * delta

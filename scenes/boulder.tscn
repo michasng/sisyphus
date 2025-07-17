@@ -7,9 +7,8 @@
 radius = 16.0
 height = 44.0
 
-[node name="Boulder" type="AnimatableBody2D"]
+[node name="Boulder" type="CharacterBody2D"]
 collision_layer = 3
-sync_to_physics = false
 script = ExtResource("1_7lox5")
 metadata/_custom_type_script = "uid://crvvmruyaiiv2"
 
