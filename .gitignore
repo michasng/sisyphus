@@ -1,3 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+# These temporary scene files should be cleaned up automatically, but they're not.
+*.tmp
