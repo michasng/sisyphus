@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://cu5jx6qinyvde"]
+
+[ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://textures/tileset.png" id="1_mi6dp"]
+[ext_resource type="Script" uid="uid://dqak67cogldur" path="res://scripts/button.gd" id="1_rhj8v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hf385"]
+atlas = ExtResource("1_mi6dp")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhj8v"]
+atlas = ExtResource("1_mi6dp")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3q610"]
+radius = 2.0
+
+[node name="ButtonTile" type="Area2D"]
+script = ExtResource("1_rhj8v")
+
+[node name="UpSprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_hf385")
+
+[node name="DownSprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("AtlasTexture_rhj8v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3q610")

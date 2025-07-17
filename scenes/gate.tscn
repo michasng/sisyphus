@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cylcuwjm83csv"]
+
+[ext_resource type="Script" uid="uid://dwgx677qty815" path="res://scripts/gate.gd" id="1_xwxio"]
+[ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://textures/tileset.png" id="2_hudsw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wi8tm"]
+size = Vector2(64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbnmf"]
+atlas = ExtResource("2_hudsw")
+region = Rect2(16, 16, 16, 16)
+
+[node name="Gate" type="StaticBody2D"]
+script = ExtResource("1_xwxio")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_wi8tm")
+
+[node name="LeftSprite2D" type="Sprite2D" parent="."]
+position = Vector2(-24, -8)
+texture = SubResource("AtlasTexture_nbnmf")
+
+[node name="CenterLeftSprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, -8)
+texture = SubResource("AtlasTexture_nbnmf")
+
+[node name="CenterRightSprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, -8)
+texture = SubResource("AtlasTexture_nbnmf")
+
+[node name="RightSprite2D" type="Sprite2D" parent="."]
+position = Vector2(24, -8)
+texture = SubResource("AtlasTexture_nbnmf")
