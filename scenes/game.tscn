@@ -39,15 +39,15 @@ position = Vector2(0, 48)
 
 [node name="Boulder" parent="YSorted" node_paths=PackedStringArray("player") instance=ExtResource("3_lbhrr")]
 position = Vector2(0, -160)
-state = 2
-velocity = Vector2(0, 56)
 player = NodePath("../Player")
+state = 2
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("5_iywne")
 target = NodePath("../YSorted/Player")
+metadata/_custom_type_script = "uid://bbbvp2jq4pcrw"
 
-[node name="HeadsUpDisplay" type="Control" parent="Camera2D" node_paths=PackedStringArray("player")]
+[node name="HeadsUpDisplay" type="Control" parent="GameCamera" node_paths=PackedStringArray("player")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -66,7 +66,9 @@ full_stamina_icon = SubResource("AtlasTexture_u5sy4")
 half_stamina_icon = SubResource("AtlasTexture_gee14")
 empty_stamina_icon = SubResource("AtlasTexture_0tnpc")
 
-[node name="StaminaContainer" type="HBoxContainer" parent="Camera2D/HeadsUpDisplay"]
+[node name="StaminaContainer" type="HBoxContainer" parent="GameCamera/HeadsUpDisplay"]
 layout_mode = 1
 offset_right = 16.0
 offset_bottom = 16.0
+
+[connection signal="state_changed" from="YSorted/Boulder" to="." method="_on_boulder_state_changed"]

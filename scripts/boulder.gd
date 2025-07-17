@@ -7,11 +7,15 @@ enum State {
 	ROLL,
 }
 
+@export var player: Player
+
 var state_timer_seconds := 0.0
 @export var state := State.IDLE:
 	set(value):
+		var previous_state = state
 		state = value
 		state_timer_seconds = 0.0
+		state_changed.emit(previous_state, state)
 
 @export var max_push_velocity_pixels_per_second := 1.5 * Game.TILE_SIZE_PIXELS
 # nearly as fast as the player can walk
@@ -22,7 +26,7 @@ var state_timer_seconds := 0.0
 
 @onready var acceleration_pixels_per_second_squared := max_roll_velocity_pixels_per_second / acceleration_seconds
 
-@export var player: Player
+signal state_changed(previous_state: State, current_state: State)
 
 
 func _physics_process(delta: float) -> void:
@@ -78,8 +82,9 @@ func _handle_physics(delta: float) -> void:
 	# or else other bodies can push this one.
 	# Unlike move_and_slide, delta needs to be applied
 	# and velocity needs to be updated manually.
-	var collision = move_and_collide(velocity * delta, true)
-	if collision:
+	var collided = move_and_collide(velocity * delta, true) != null
+	if collided:
+		state = State.PUSH
 		velocity = Vector2.ZERO
 	else:
 		position += velocity * delta
