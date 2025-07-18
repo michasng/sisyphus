@@ -1,8 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://copx3gyi50kxw"]
+[gd_scene load_steps=28 format=3 uid="uid://copx3gyi50kxw"]
 
 [ext_resource type="Texture2D" uid="uid://sb0fqrpnaocr" path="res://resources/textures/sisyphos.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dxsocwil37nq0" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://bce5j6ce15ctg" path="res://scripts/player_animated_sprite_2d.gd" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://7827cu6nmnaf" path="res://resources/sounds/player_step.wav" id="4_qlg0r"]
+[ext_resource type="Script" uid="uid://epioxgcm5jlk" path="res://scripts/sound_effect.gd" id="5_tuyoq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -193,3 +195,10 @@ shape = SubResource("CircleShape2D_3vyb7")
 [node name="BoulderRayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, -1.5)
 collision_mask = 2
+
+[node name="StepSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_qlg0r")
+volume_db = -8.0
+script = ExtResource("5_tuyoq")
+max_pitch_scale = 1.2
+metadata/_custom_type_script = "uid://epioxgcm5jlk"

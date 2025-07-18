@@ -23,6 +23,7 @@ var stamina: float = max_stamina:
 		stamina = value
 
 @onready var _boulder_ray_cast: RayCast2D = $BoulderRayCast2D
+@onready var _step_sound_effect: SoundEffect = $StepSoundEffect
 
 
 func _physics_process(delta: float) -> void:
@@ -56,6 +57,11 @@ func _handle_physics(_delta: float) -> void:
 		else:
 			velocity = _get_input_direction() * walk_velocity_pixels_per_second
 		move_and_slide()
+
+		if velocity.length() > 0.0:
+			# time between steps calculated based on FPS and sound effect duration
+			_step_sound_effect.pause_time_seconds = 0.087 if state == State.SPRINT else 0.17
+			_step_sound_effect.resume()
 
 
 func _handle_stamina(delta: float) -> void:
