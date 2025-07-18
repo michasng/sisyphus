@@ -22,7 +22,7 @@ var state_timer_seconds := 0.0
 @export var max_push_velocity_pixels_per_second := 1.5 * Game.TILE_SIZE_PIXELS
 # nearly as fast as the player can walk
 @export var max_roll_velocity_pixels_per_second := 3.5 * Game.TILE_SIZE_PIXELS
-@export var idle_to_roll_duration_seconds := 1.0
+@export var idle_to_roll_duration_seconds := 2.0
 @export var acceleration_seconds := 5.0
 @export var stop_roll_y := 0.0
 
