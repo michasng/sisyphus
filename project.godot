@@ -80,6 +80,7 @@ sprint={
 2d_physics/layer_1="solid"
 2d_physics/layer_2="boulder"
 2d_physics/layer_3="path"
+2d_physics/layer_4="enemy_hit"
 
 [rendering]
 

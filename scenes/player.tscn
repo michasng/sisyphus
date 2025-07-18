@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://copx3gyi50kxw"]
+[gd_scene load_steps=36 format=3 uid="uid://copx3gyi50kxw"]
 
 [ext_resource type="Texture2D" uid="uid://sb0fqrpnaocr" path="res://resources/textures/sisyphos.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dxsocwil37nq0" path="res://scripts/player.gd" id="1_g2els"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://epioxgcm5jlk" path="res://scripts/sound_effect.gd" id="5_tuyoq"]
 [ext_resource type="AudioStream" uid="uid://dlhwbieujoay1" path="res://resources/sounds/player_rest.wav" id="6_tuyoq"]
 [ext_resource type="AudioStream" uid="uid://bfthfq2alhprg" path="res://resources/sounds/player_rested.wav" id="7_fjrip"]
+[ext_resource type="AudioStream" uid="uid://nnd2u3o8oykw" path="res://resources/sounds/player_hurt.wav" id="9_ur7pv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a38lo"]
 atlas = ExtResource("1_3vyb7")
@@ -209,8 +210,11 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3vyb7"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
 radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ur7pv"]
+radius = 6.0
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
@@ -225,7 +229,15 @@ player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
-shape = SubResource("CircleShape2D_3vyb7")
+shape = SubResource("CircleShape2D_smehm")
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, 4)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_ur7pv")
 
 [node name="UpBoulderRayCast" type="RayCast2D" parent="."]
 target_position = Vector2(0, -1.5)
@@ -257,3 +269,10 @@ metadata/_custom_type_script = "uid://epioxgcm5jlk"
 stream = ExtResource("7_fjrip")
 script = ExtResource("5_tuyoq")
 metadata/_custom_type_script = "uid://epioxgcm5jlk"
+
+[node name="HurtSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_ur7pv")
+script = ExtResource("5_tuyoq")
+metadata/_custom_type_script = "uid://epioxgcm5jlk"
+
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

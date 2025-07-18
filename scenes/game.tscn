@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://un81rc8dqj2"]
+[gd_scene load_steps=17 format=4 uid="uid://un81rc8dqj2"]
 
 [ext_resource type="Script" uid="uid://dvuowjoy50k4b" path="res://scripts/game.gd" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://resources/textures/tileset.png" id="1_uwrxv"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dl4iogqfx24e5" path="res://scenes/boulder.tscn" id="3_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cylcuwjm83csv" path="res://scenes/gate.tscn" id="5_0tnpc"]
 [ext_resource type="Script" uid="uid://bbbvp2jq4pcrw" path="res://scripts/game_camera.gd" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://bhnwn34ic1p7i" path="res://scenes/bat.tscn" id="6_kvpfn"]
 [ext_resource type="Script" uid="uid://df1tsxh51cse6" path="res://scripts/heads_up_display.gd" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cu5jx6qinyvde" path="res://scenes/button_tile.tscn" id="6_vtaks"]
 
@@ -69,6 +70,10 @@ position = Vector2(0, 48)
 position = Vector2(0, -80)
 player = NodePath("../Player")
 state = 2
+
+[node name="Bat" parent="YSorted" node_paths=PackedStringArray("target") instance=ExtResource("6_kvpfn")]
+position = Vector2(-16, -6)
+target = NodePath("../Player")
 
 [node name="YSortedObjects" type="Node2D" parent="YSorted"]
 y_sort_enabled = true

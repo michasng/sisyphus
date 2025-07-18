@@ -32,10 +32,12 @@ var stamina: float = max_stamina
 @onready var _up_boulder_ray_cast: RayCast2D = $UpBoulderRayCast
 @onready var _left_boulder_ray_cast: RayCast2D = $LeftBoulderRayCast
 @onready var _right_boulder_ray_cast: RayCast2D = $RightBoulderRayCast
+@onready var _hurt_box: Area2D = $HurtBox
 
 @onready var _step_sound_effect: SoundEffect = $StepSoundEffect
 @onready var _rest_sound_effect: SoundEffect = $RestSoundEffect
 @onready var _rested_sound_effect: SoundEffect = $RestedSoundEffect
+@onready var _hurt_sound_effect: SoundEffect = $HurtSoundEffect
 
 
 func _physics_process(delta: float) -> void:
@@ -92,3 +94,12 @@ func get_input_direction() -> Vector2:
 		Input.get_axis("left", "right"),
 		Input.get_axis("up", "down"),
 	).normalized()
+
+
+func _on_hurt_box_body_entered(_body: Node2D) -> void:
+	health -= 0.5
+	_hurt_sound_effect.resume()
+	# must set deferred, because area monitoring itself has triggered this event
+	_hurt_box.set_deferred("monitoring", false)
+	await get_tree().create_timer(1).timeout
+	_hurt_box.set_deferred("monitoring", true)
