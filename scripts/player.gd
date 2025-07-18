@@ -39,6 +39,8 @@ var stamina: float = max_stamina
 @onready var _rested_sound_effect: SoundEffect = $RestedSoundEffect
 @onready var _hurt_sound_effect: SoundEffect = $HurtSoundEffect
 
+signal hurt
+
 
 func _physics_process(delta: float) -> void:
 	# mind the order: transition states before handling physics
@@ -99,6 +101,7 @@ func get_input_direction() -> Vector2:
 func _on_hurt_box_body_entered(_body: Node2D) -> void:
 	health -= 0.5
 	_hurt_sound_effect.resume()
+	hurt.emit()
 	# must set deferred, because area monitoring itself has triggered this event
 	_hurt_box.set_deferred("monitoring", false)
 	await get_tree().create_timer(1).timeout

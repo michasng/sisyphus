@@ -137,6 +137,7 @@ alignment = 2
 [connection signal="is_pressed_changed" from="BackgroundObjects/Button1" to="YSorted/YSortedObjects/Gate1" method="_on_button_is_pressed_changed"]
 [connection signal="is_pressed_changed" from="BackgroundObjects/Button2_1" to="YSorted/YSortedObjects/Gate2" method="_on_button_is_pressed_changed"]
 [connection signal="is_pressed_changed" from="BackgroundObjects/Button2_2" to="YSorted/YSortedObjects/Gate2" method="_on_button_is_pressed_changed"]
+[connection signal="hurt" from="YSorted/Player" to="." method="_on_player_hurt"]
 [connection signal="state_changed" from="YSorted/Boulder" to="." method="_on_boulder_state_changed"]
 [connection signal="opened" from="YSorted/YSortedObjects/Gate2" to="BackgroundObjects/Button2_1" method="on_gate_opened"]
 [connection signal="opened" from="YSorted/YSortedObjects/Gate2" to="BackgroundObjects/Button2_2" method="on_gate_opened"]
