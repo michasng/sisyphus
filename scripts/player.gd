@@ -51,12 +51,12 @@ func _transition_states() -> void:
 		return
 
 	var input_direction = get_input_direction()
-	if input_direction.angle() == Vector2.UP.angle() and _up_boulder_ray_cast.is_colliding() or \
-		input_direction.angle() == Vector2.LEFT.angle() and _left_boulder_ray_cast.is_colliding() or \
-		input_direction.angle() == Vector2.RIGHT.angle() and _right_boulder_ray_cast.is_colliding():
-		state = State.PUSH
-	elif input_direction:
-		if Input.is_action_pressed("sprint"):
+	if input_direction:
+		if input_direction.angle() == Vector2.UP.angle() and _up_boulder_ray_cast.is_colliding() or \
+			input_direction.angle() == Vector2.LEFT.angle() and _left_boulder_ray_cast.is_colliding() or \
+			input_direction.angle() == Vector2.RIGHT.angle() and _right_boulder_ray_cast.is_colliding():
+			state = State.PUSH
+		elif Input.is_action_pressed("sprint"):
 			state = State.SPRINT
 		else:
 			state = State.WALK
