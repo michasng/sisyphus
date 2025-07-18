@@ -1,14 +1,36 @@
-[gd_scene load_steps=7 format=3 uid="uid://dl4iogqfx24e5"]
+[gd_scene load_steps=12 format=3 uid="uid://dl4iogqfx24e5"]
 
 [ext_resource type="Script" uid="uid://crvvmruyaiiv2" path="res://scripts/boulder.gd" id="1_7lox5"]
 [ext_resource type="Texture2D" uid="uid://badvcn06a66e6" path="res://resources/textures/boulder.png" id="1_475t6"]
 [ext_resource type="AudioStream" uid="uid://cjwbfx0ad36vj" path="res://resources/sounds/boulder_move.wav" id="3_jrtjv"]
 [ext_resource type="Script" uid="uid://epioxgcm5jlk" path="res://scripts/sound_effect.gd" id="4_jrtjv"]
 [ext_resource type="AudioStream" uid="uid://b4y3hq08t3g0r" path="res://resources/sounds/boulder_stop.wav" id="5_8hte1"]
+[ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://resources/textures/tileset.png" id="6_c7t8v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7lox5"]
 radius = 16.0
 height = 44.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsdet"]
+atlas = ExtResource("6_c7t8v")
+region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="Curve" id="Curve_hs4d4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.738916, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.74006, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yxu8s"]
+curve = SubResource("Curve_hs4d4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_se5g7"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(8, 0, 0)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 18.0
+initial_velocity_max = 24.0
+gravity = Vector3(0, 32, 0)
+alpha_curve = SubResource("CurveTexture_yxu8s")
 
 [node name="Boulder" type="CharacterBody2D"]
 collision_layer = 3
@@ -30,3 +52,10 @@ script = ExtResource("4_jrtjv")
 [node name="StopSoundEffect" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_8hte1")
 script = ExtResource("4_jrtjv")
+
+[node name="MoveParticles" type="GPUParticles2D" parent="."]
+position = Vector2(0, 24)
+amount = 4
+texture = SubResource("AtlasTexture_xsdet")
+lifetime = 0.8
+process_material = SubResource("ParticleProcessMaterial_se5g7")

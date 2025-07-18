@@ -16,6 +16,8 @@ var state_timer_seconds := 0.0
 		state = value
 		state_timer_seconds = 0.0
 		state_changed.emit(previous_state, state)
+		if _move_particles: # not assigned when exported state is set
+			_move_particles.emitting = state != State.IDLE
 
 @export var max_push_velocity_pixels_per_second := 1.5 * Game.TILE_SIZE_PIXELS
 # nearly as fast as the player can walk
@@ -25,7 +27,8 @@ var state_timer_seconds := 0.0
 @export var stop_roll_y := 0.0
 
 @onready var acceleration_pixels_per_second_squared := max_roll_velocity_pixels_per_second / acceleration_seconds
-@onready var move_sound_effect: SoundEffect = $MoveSoundEffect
+@onready var _move_particles: GPUParticles2D = $MoveParticles
+@onready var _move_sound_effect: SoundEffect = $MoveSoundEffect
 @onready var stop_sound_effect: SoundEffect = $StopSoundEffect
 
 signal state_changed(previous_state: State, current_state: State)
@@ -93,5 +96,5 @@ func _handle_physics(delta: float) -> void:
 
 	if velocity.length() > Game.TILE_SIZE_PIXELS * 0.2:
 		var velocity_fraction = velocity.length() / max_roll_velocity_pixels_per_second
-		move_sound_effect.volume_linear = lerpf(0.3, 1.0, velocity_fraction)
-		move_sound_effect.resume()
+		_move_sound_effect.volume_linear = lerpf(0.3, 1.0, velocity_fraction)
+		_move_sound_effect.resume()
