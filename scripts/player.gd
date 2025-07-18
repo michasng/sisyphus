@@ -25,6 +25,7 @@ enum State {
 @export var stamina_recharge_per_second := 1.0
 @export var push_stamina_consumption_per_second := 0.5
 @export var sprint_stamina_consumption_per_second := 0.5
+@export var hurt_invicibility_seconds := 1.0
 
 var health: float = max_health
 var stamina: float = max_stamina
@@ -98,11 +99,21 @@ func get_input_direction() -> Vector2:
 	).normalized()
 
 
-func _on_hurt_box_body_entered(_body: Node2D) -> void:
-	health -= 0.5
+func _hurt(damage: float) -> void:
+	health -= damage
+	if health <= 0:
+		# call_deferred, because collision objects mustn't be removed in physics frame
+		get_tree().call_deferred("reload_current_scene")
+		return
+
 	_hurt_sound_effect.resume()
 	hurt.emit()
-	# must set deferred, because area monitoring itself has triggered this event
+
+	# set_deferred, because hurt_box.monitoring is locked during signal
 	_hurt_box.set_deferred("monitoring", false)
-	await get_tree().create_timer(1).timeout
-	_hurt_box.set_deferred("monitoring", true)
+	await get_tree().create_timer(hurt_invicibility_seconds).timeout
+	_hurt_box.monitoring = true
+
+
+func _on_hurt_box_body_entered(_body: Node2D) -> void:
+	_hurt(0.5)
