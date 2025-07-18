@@ -3,36 +3,34 @@ extends AnimatedSprite2D
 
 @export var player: Player
 
+var postfix_by_direction: Dictionary[Vector2i, String] = {
+	Vector2i.UP: "up",
+	Vector2i.DOWN: "down",
+	Vector2i.LEFT: "left",
+	# there are no "right" frames, so the sprite is flipped instead, cmp. flip_h
+	Vector2i.RIGHT: "left",
+}
 
 func _process(_delta: float) -> void:
+	var postfix = postfix_by_direction[player.view_direction]
+
 	match player.state:
 		Player.State.IDLE:
-			if animation == "rest":
-				animation = "walk_down"
+			animation = "walk_%s" % postfix
 			stop()
 			# Stop on the last frame, because I've made the last frames look idle
 			# so the first frame is always in movement.
 			# Otherwise the player appears to slide while an animation starts.
 			frame = sprite_frames.get_frame_count(animation) - 1
 		Player.State.WALK:
-			_play_walk_animations()
+			play("walk_%s" % postfix)
 		Player.State.SPRINT:
-			_play_walk_animations(1.5)
+			play("walk_%s" % postfix, 1.5)
 		Player.State.PUSH:
-			play("push_up" if player.velocity.y < 0 else "push_left")
-			flip_h = player.velocity.y == 0 and player.velocity.x > 0
+			play("push_%s" % postfix)
 		Player.State.REST:
 			play("rest")
-			flip_h = false
+		Player.State.PUNCH:
+			play("punch_%s" % postfix)
 
-
-func _play_walk_animations(speed: float = 1.0) -> void:
-	if player.velocity.y < 0:
-		play("walk_up", speed)
-	elif player.velocity.y > 0:
-		play("walk_down", speed)
-	elif player.velocity.x < 0:
-		play("walk_left", speed)
-	elif player.velocity.x > 0:
-		play("walk_left", speed)
-	flip_h = player.velocity.y == 0 and player.velocity.x > 0
+	flip_h = player.view_direction == Vector2i.RIGHT
