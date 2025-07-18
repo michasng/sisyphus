@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cu5jx6qinyvde"]
+[gd_scene load_steps=9 format=3 uid="uid://cu5jx6qinyvde"]
 
 [ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://resources/textures/tileset.png" id="1_mi6dp"]
 [ext_resource type="Script" uid="uid://dqak67cogldur" path="res://scripts/button.gd" id="1_rhj8v"]
 [ext_resource type="AudioStream" uid="uid://fgdx6udlnwh3" path="res://resources/sounds/button_press.wav" id="3_dd4b1"]
 [ext_resource type="Script" uid="uid://epioxgcm5jlk" path="res://scripts/sound_effect.gd" id="4_p2i2o"]
+[ext_resource type="AudioStream" uid="uid://be0mt66vhpm5p" path="res://resources/sounds/button_release.wav" id="5_p2i2o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hf385"]
 atlas = ExtResource("1_mi6dp")
@@ -32,4 +33,13 @@ shape = SubResource("CircleShape2D_3q610")
 [node name="PressSoundEffect" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_dd4b1")
 script = ExtResource("4_p2i2o")
+min_pitch_scale = 0.0
+max_pitch_scale = 0.0
+metadata/_custom_type_script = "uid://epioxgcm5jlk"
+
+[node name="ReleaseSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_p2i2o")
+script = ExtResource("4_p2i2o")
+min_pitch_scale = 0.0
+max_pitch_scale = 0.0
 metadata/_custom_type_script = "uid://epioxgcm5jlk"

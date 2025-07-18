@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cylcuwjm83csv"]
+[gd_scene load_steps=7 format=3 uid="uid://cylcuwjm83csv"]
 
 [ext_resource type="Script" uid="uid://dwgx677qty815" path="res://scripts/gate.gd" id="1_xwxio"]
 [ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://resources/textures/tileset.png" id="2_hudsw"]
+[ext_resource type="AudioStream" uid="uid://dgi1dgcvcnh87" path="res://resources/sounds/gate_open.wav" id="3_wi8tm"]
+[ext_resource type="Script" uid="uid://epioxgcm5jlk" path="res://scripts/sound_effect.gd" id="4_nbnmf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wi8tm"]
 size = Vector2(64, 16)
@@ -32,3 +34,10 @@ texture = SubResource("AtlasTexture_nbnmf")
 [node name="RightSprite2D" type="Sprite2D" parent="."]
 position = Vector2(24, -8)
 texture = SubResource("AtlasTexture_nbnmf")
+
+[node name="OpenSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wi8tm")
+script = ExtResource("4_nbnmf")
+min_pitch_scale = 0.8
+max_pitch_scale = 1.1
+metadata/_custom_type_script = "uid://epioxgcm5jlk"
