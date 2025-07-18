@@ -1,10 +1,12 @@
-[gd_scene load_steps=28 format=3 uid="uid://copx3gyi50kxw"]
+[gd_scene load_steps=30 format=3 uid="uid://copx3gyi50kxw"]
 
 [ext_resource type="Texture2D" uid="uid://sb0fqrpnaocr" path="res://resources/textures/sisyphos.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dxsocwil37nq0" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://bce5j6ce15ctg" path="res://scripts/player_animated_sprite_2d.gd" id="3_qhqgy"]
 [ext_resource type="AudioStream" uid="uid://7827cu6nmnaf" path="res://resources/sounds/player_step.wav" id="4_qlg0r"]
 [ext_resource type="Script" uid="uid://epioxgcm5jlk" path="res://scripts/sound_effect.gd" id="5_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://dlhwbieujoay1" path="res://resources/sounds/player_rest.wav" id="6_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://bfthfq2alhprg" path="res://resources/sounds/player_rested.wav" id="7_fjrip"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -201,4 +203,14 @@ stream = ExtResource("4_qlg0r")
 volume_db = -8.0
 script = ExtResource("5_tuyoq")
 max_pitch_scale = 1.2
+metadata/_custom_type_script = "uid://epioxgcm5jlk"
+
+[node name="RestSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_tuyoq")
+script = ExtResource("5_tuyoq")
+metadata/_custom_type_script = "uid://epioxgcm5jlk"
+
+[node name="RestedSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_fjrip")
+script = ExtResource("5_tuyoq")
 metadata/_custom_type_script = "uid://epioxgcm5jlk"

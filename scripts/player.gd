@@ -9,7 +9,14 @@ enum State {
 	REST,
 }
 
-@export var state := State.IDLE
+@export var state := State.IDLE:
+	set(value):
+		if value != state: # state changed
+			if value == State.REST:
+				_rest_sound_effect.resume()
+			if state == State.REST:
+				_rested_sound_effect.resume()
+		state = value
 
 @export var walk_velocity_pixels_per_second := 3.0 * Game.TILE_SIZE_PIXELS
 @export var sprint_velocity_pixels_per_second := 4.5 * Game.TILE_SIZE_PIXELS
@@ -24,6 +31,8 @@ var stamina: float = max_stamina:
 
 @onready var _boulder_ray_cast: RayCast2D = $BoulderRayCast2D
 @onready var _step_sound_effect: SoundEffect = $StepSoundEffect
+@onready var _rest_sound_effect: SoundEffect = $RestSoundEffect
+@onready var _rested_sound_effect: SoundEffect = $RestedSoundEffect
 
 
 func _physics_process(delta: float) -> void:
