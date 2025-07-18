@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://badvcn06a66e6"
-path="res://.godot/imported/boulder.png-3c3e77767dcb4658b17434b4ef1ae85c.ctex"
+uid="uid://sb0fqrpnaocr"
+path="res://.godot/imported/sisyphos.png-cf76cf407b9475f13013fc23da791ae0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/boulder.png"
-dest_files=["res://.godot/imported/boulder.png-3c3e77767dcb4658b17434b4ef1ae85c.ctex"]
+source_file="res://resources/textures/sisyphos.png"
+dest_files=["res://.godot/imported/sisyphos.png-cf76cf407b9475f13013fc23da791ae0.ctex"]
 
 [params]
 

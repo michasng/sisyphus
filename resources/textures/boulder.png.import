@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgcxr7dw0war"
-path="res://.godot/imported/vinik24.png-60f2767cf392fd7f1ebc2cc631eafbdc.ctex"
+uid="uid://badvcn06a66e6"
+path="res://.godot/imported/boulder.png-4e6609a80ffb90cb06df1ddc9734f45e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/vinik24.png"
-dest_files=["res://.godot/imported/vinik24.png-60f2767cf392fd7f1ebc2cc631eafbdc.ctex"]
+source_file="res://resources/textures/boulder.png"
+dest_files=["res://.godot/imported/boulder.png-4e6609a80ffb90cb06df1ddc9734f45e.ctex"]
 
 [params]
 

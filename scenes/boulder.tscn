@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dl4iogqfx24e5"]
+[gd_scene load_steps=7 format=3 uid="uid://dl4iogqfx24e5"]
 
 [ext_resource type="Script" uid="uid://crvvmruyaiiv2" path="res://scripts/boulder.gd" id="1_7lox5"]
-[ext_resource type="Texture2D" uid="uid://badvcn06a66e6" path="res://textures/boulder.png" id="1_475t6"]
+[ext_resource type="Texture2D" uid="uid://badvcn06a66e6" path="res://resources/textures/boulder.png" id="1_475t6"]
+[ext_resource type="AudioStream" uid="uid://cjwbfx0ad36vj" path="res://resources/sounds/boulder_move.wav" id="3_jrtjv"]
+[ext_resource type="Script" uid="uid://epioxgcm5jlk" path="res://scripts/sound_effect.gd" id="4_jrtjv"]
+[ext_resource type="AudioStream" uid="uid://b4y3hq08t3g0r" path="res://resources/sounds/boulder_stop.wav" id="5_8hte1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7lox5"]
 radius = 16.0
@@ -19,3 +22,11 @@ texture = ExtResource("1_475t6")
 position = Vector2(0, 7)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_7lox5")
+
+[node name="MoveSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jrtjv")
+script = ExtResource("4_jrtjv")
+
+[node name="StopSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_8hte1")
+script = ExtResource("4_jrtjv")

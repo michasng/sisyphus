@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=4 uid="uid://un81rc8dqj2"]
 
 [ext_resource type="Script" uid="uid://dvuowjoy50k4b" path="res://scripts/game.gd" id="1_lbhrr"]
-[ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://textures/tileset.png" id="1_uwrxv"]
+[ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://resources/textures/tileset.png" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://copx3gyi50kxw" path="res://scenes/player.tscn" id="2_lnu2h"]
 [ext_resource type="TileSet" uid="uid://b8puki4iqg5tc" path="res://resources/tile_set.tres" id="3_iywne"]
 [ext_resource type="PackedScene" uid="uid://dl4iogqfx24e5" path="res://scenes/boulder.tscn" id="3_lbhrr"]

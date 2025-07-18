@@ -10,3 +10,4 @@ const TILE_SIZE_PIXELS: int = 16
 func _on_boulder_state_changed(previous_state: Boulder.State, _current_state: Boulder.State) -> void:
 	if previous_state == Boulder.State.ROLL and boulder.velocity.y > 20.0:
 		camera.shake(0.5)
+		boulder.stop_sound_effect.play()

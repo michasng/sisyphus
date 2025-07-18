@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b55rm7vq2qmh4"
-path="res://.godot/imported/tileset.png-c58e1bf82d47fc19d60aef6c7192e952.ctex"
+uid="uid://dhfy80po4oy41"
+path="res://.godot/imported/vinik24_extended.png-c8009bf918a3a3ff4266a5433a58497d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/tileset.png"
-dest_files=["res://.godot/imported/tileset.png-c58e1bf82d47fc19d60aef6c7192e952.ctex"]
+source_file="res://resources/textures/vinik24_extended.png"
+dest_files=["res://.godot/imported/vinik24_extended.png-c8009bf918a3a3ff4266a5433a58497d.ctex"]
 
 [params]
 

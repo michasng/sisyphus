@@ -28,9 +28,10 @@ window/stretch/scale_mode="integer"
 
 folder_colors={
 "res://resources/": "blue",
+"res://resources/sounds/": "orange",
+"res://resources/textures/": "green",
 "res://scenes/": "yellow",
-"res://scripts/": "purple",
-"res://textures/": "green"
+"res://scripts/": "purple"
 }
 
 [input]

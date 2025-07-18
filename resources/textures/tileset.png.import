@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sb0fqrpnaocr"
-path="res://.godot/imported/sisyphos.png-926c50fb245f80ef454883ac4ff14994.ctex"
+uid="uid://b55rm7vq2qmh4"
+path="res://.godot/imported/tileset.png-9d4a1fc9f984e732d0bfe288c5a894ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/sisyphos.png"
-dest_files=["res://.godot/imported/sisyphos.png-926c50fb245f80ef454883ac4ff14994.ctex"]
+source_file="res://resources/textures/tileset.png"
+dest_files=["res://.godot/imported/tileset.png-9d4a1fc9f984e732d0bfe288c5a894ee.ctex"]
 
 [params]
 

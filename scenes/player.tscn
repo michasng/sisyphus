@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://copx3gyi50kxw"]
 
-[ext_resource type="Texture2D" uid="uid://sb0fqrpnaocr" path="res://textures/sisyphos.png" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://sb0fqrpnaocr" path="res://resources/textures/sisyphos.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dxsocwil37nq0" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://bce5j6ce15ctg" path="res://scripts/player_animated_sprite_2d.gd" id="3_qhqgy"]
 
