@@ -65,11 +65,16 @@ func _handle_physics(delta: float) -> void:
 		State.IDLE:
 			velocity = Vector2.ZERO
 		State.PUSH:
+			var input_direction = player.get_input_direction()
 			velocity = Vector2(
-				0,
+				move_toward(
+					velocity.x,
+					input_direction.x * max_push_velocity_pixels_per_second,
+					acceleration_pixels_per_second_squared * delta,
+				),
 				move_toward(
 					velocity.y,
-					-max_push_velocity_pixels_per_second,
+					input_direction.y * max_push_velocity_pixels_per_second,
 					acceleration_pixels_per_second_squared * delta,
 				)
 			)

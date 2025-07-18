@@ -19,8 +19,8 @@ func _process(_delta: float) -> void:
 		Player.State.SPRINT:
 			_play_walk_animations(1.5)
 		Player.State.PUSH:
-			play("push_up")
-			flip_h = false
+			play("push_up" if player.velocity.y < 0 else "push_left")
+			flip_h = player.velocity.y == 0 and player.velocity.x > 0
 		Player.State.REST:
 			play("rest")
 			flip_h = false

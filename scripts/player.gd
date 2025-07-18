@@ -29,7 +29,10 @@ var stamina: float = max_stamina:
 	set(value):
 		stamina = value
 
-@onready var _boulder_ray_cast: RayCast2D = $BoulderRayCast2D
+@onready var _up_boulder_ray_cast: RayCast2D = $UpBoulderRayCast
+@onready var _left_boulder_ray_cast: RayCast2D = $LeftBoulderRayCast
+@onready var _right_boulder_ray_cast: RayCast2D = $RightBoulderRayCast
+
 @onready var _step_sound_effect: SoundEffect = $StepSoundEffect
 @onready var _rest_sound_effect: SoundEffect = $RestSoundEffect
 @onready var _rested_sound_effect: SoundEffect = $RestedSoundEffect
@@ -47,8 +50,10 @@ func _transition_states() -> void:
 		state = State.REST
 		return
 
-	var input_direction = _get_input_direction()
-	if input_direction.angle() == Vector2.UP.angle() and _boulder_ray_cast.is_colliding():
+	var input_direction = get_input_direction()
+	if input_direction.angle() == Vector2.UP.angle() and _up_boulder_ray_cast.is_colliding() or \
+		input_direction.angle() == Vector2.LEFT.angle() and _left_boulder_ray_cast.is_colliding() or \
+		input_direction.angle() == Vector2.RIGHT.angle() and _right_boulder_ray_cast.is_colliding():
 		state = State.PUSH
 	elif input_direction:
 		if Input.is_action_pressed("sprint"):
@@ -62,9 +67,9 @@ func _transition_states() -> void:
 func _handle_physics(_delta: float) -> void:
 	if state not in [State.IDLE, State.REST]:
 		if state == State.SPRINT:
-			velocity = _get_input_direction() * sprint_velocity_pixels_per_second
+			velocity = get_input_direction() * sprint_velocity_pixels_per_second
 		else:
-			velocity = _get_input_direction() * walk_velocity_pixels_per_second
+			velocity = get_input_direction() * walk_velocity_pixels_per_second
 		move_and_slide()
 
 		if velocity.length() > 0.0:
@@ -82,7 +87,7 @@ func _handle_stamina(delta: float) -> void:
 		stamina = move_toward(stamina, max_stamina, stamina_recharge_per_second * delta)
 
 
-func _get_input_direction() -> Vector2:
+func get_input_direction() -> Vector2:
 	return Vector2(
 		Input.get_axis("left", "right"),
 		Input.get_axis("up", "down"),

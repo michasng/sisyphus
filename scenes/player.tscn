@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://copx3gyi50kxw"]
+[gd_scene load_steps=34 format=3 uid="uid://copx3gyi50kxw"]
 
 [ext_resource type="Texture2D" uid="uid://sb0fqrpnaocr" path="res://resources/textures/sisyphos.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dxsocwil37nq0" path="res://scripts/player.gd" id="1_g2els"]
@@ -7,6 +7,22 @@
 [ext_resource type="Script" uid="uid://epioxgcm5jlk" path="res://scripts/sound_effect.gd" id="5_tuyoq"]
 [ext_resource type="AudioStream" uid="uid://dlhwbieujoay1" path="res://resources/sounds/player_rest.wav" id="6_tuyoq"]
 [ext_resource type="AudioStream" uid="uid://bfthfq2alhprg" path="res://resources/sounds/player_rested.wav" id="7_fjrip"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a38lo"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ni07"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l71n6"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke2ow"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(112, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -90,6 +106,23 @@ region = Rect2(48, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fulsm"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a38lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ni07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l71n6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ke2ow")
+}],
+"loop": true,
+"name": &"push_left",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g2els")
@@ -185,8 +218,8 @@ script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
 sprite_frames = SubResource("SpriteFrames_fulsm")
-animation = &"walk_up"
-frame = 3
+animation = &"walk_down"
+frame = 1
 script = ExtResource("3_qhqgy")
 player = NodePath("..")
 
@@ -194,8 +227,18 @@ player = NodePath("..")
 position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_3vyb7")
 
-[node name="BoulderRayCast2D" type="RayCast2D" parent="."]
+[node name="UpBoulderRayCast" type="RayCast2D" parent="."]
 target_position = Vector2(0, -1.5)
+collision_mask = 2
+
+[node name="LeftBoulderRayCast" type="RayCast2D" parent="."]
+position = Vector2(-4, 4)
+target_position = Vector2(-1.5, 0)
+collision_mask = 2
+
+[node name="RightBoulderRayCast" type="RayCast2D" parent="."]
+position = Vector2(4, 4)
+target_position = Vector2(1.5, 0)
 collision_mask = 2
 
 [node name="StepSoundEffect" type="AudioStreamPlayer2D" parent="."]
