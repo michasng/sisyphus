@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://un81rc8dqj2"]
+[gd_scene load_steps=16 format=4 uid="uid://un81rc8dqj2"]
 
 [ext_resource type="Script" uid="uid://dvuowjoy50k4b" path="res://scripts/game.gd" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://resources/textures/tileset.png" id="1_uwrxv"]
@@ -9,6 +9,18 @@
 [ext_resource type="Script" uid="uid://bbbvp2jq4pcrw" path="res://scripts/game_camera.gd" id="5_iywne"]
 [ext_resource type="Script" uid="uid://df1tsxh51cse6" path="res://scripts/heads_up_display.gd" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cu5jx6qinyvde" path="res://scenes/button_tile.tscn" id="6_vtaks"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtaks"]
+atlas = ExtResource("1_uwrxv")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvpfn"]
+atlas = ExtResource("1_uwrxv")
+region = Rect2(64, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dinhu"]
+atlas = ExtResource("1_uwrxv")
+region = Rect2(80, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u5sy4"]
 atlas = ExtResource("1_uwrxv")
@@ -92,14 +104,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_u5sy4")
 player = NodePath("../../YSorted/Player")
+full_health_icon = SubResource("AtlasTexture_vtaks")
+half_health_icon = SubResource("AtlasTexture_kvpfn")
+empty_health_icon = SubResource("AtlasTexture_dinhu")
 full_stamina_icon = SubResource("AtlasTexture_u5sy4")
 half_stamina_icon = SubResource("AtlasTexture_gee14")
 empty_stamina_icon = SubResource("AtlasTexture_0tnpc")
 
+[node name="HealthContainer" type="HBoxContainer" parent="GameCamera/HeadsUpDisplay"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
 [node name="StaminaContainer" type="HBoxContainer" parent="GameCamera/HeadsUpDisplay"]
 layout_mode = 1
-offset_right = 16.0
-offset_bottom = 16.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
 
 [connection signal="is_pressed_changed" from="BackgroundObjects/Button1" to="YSorted/YSortedObjects/Gate1" method="_on_button_is_pressed_changed"]
 [connection signal="is_pressed_changed" from="BackgroundObjects/Button2_1" to="YSorted/YSortedObjects/Gate2" method="_on_button_is_pressed_changed"]
