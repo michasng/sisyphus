@@ -9,6 +9,7 @@ const TILE_SIZE_PIXELS: int = 16
 
 
 func _ready() -> void:
+	await get_tree().create_timer(4.0).timeout
 	heads_up_display.text = "Zeus: Sisyphus, you cheat!
 	  Enjoy your rock."
 

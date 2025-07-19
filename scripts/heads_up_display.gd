@@ -15,14 +15,17 @@ extends Control
 @export var label: Label
 @export var health_container: Container
 @export var stamina_container: Container
+@onready var type_sound_effect: SoundEffect = $TypeSoundEffect
 
+var _typing_queue: String
 var text: String:
 	get:
 		return label.text
 	set(value):
-		label.text = value
+		label.text = ""
+		_typing_queue = value
 		label_container.visible = true
-		await get_tree().create_timer(2.0).timeout
+		await get_tree().create_timer(3.0).timeout
 		label_container.visible = false
 
 
@@ -39,6 +42,11 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	_update_health()
 	_update_stamina()
+	
+	if _typing_queue.length() > 0:
+		label.text += _typing_queue[0]
+		_typing_queue = _typing_queue.erase(0)
+		type_sound_effect.resume()
 
 
 func _update_health() -> void:

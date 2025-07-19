@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://un81rc8dqj2"]
+[gd_scene load_steps=20 format=4 uid="uid://un81rc8dqj2"]
 
 [ext_resource type="Script" uid="uid://dvuowjoy50k4b" path="res://scripts/game.gd" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://resources/textures/tileset.png" id="1_uwrxv"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://df1tsxh51cse6" path="res://scripts/heads_up_display.gd" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cu5jx6qinyvde" path="res://scenes/button_tile.tscn" id="6_vtaks"]
 [ext_resource type="Theme" uid="uid://ekqcvbc2bhhf" path="res://resources/theme.tres" id="9_kvpfn"]
+[ext_resource type="AudioStream" uid="uid://joyau66bmchm" path="res://resources/sounds/type.wav" id="12_kvuet"]
+[ext_resource type="Script" uid="uid://epioxgcm5jlk" path="res://scripts/sound_effect.gd" id="13_trtic"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vtaks"]
 atlas = ExtResource("1_uwrxv")
@@ -160,6 +162,7 @@ grow_vertical = 0
 alignment = 2
 
 [node name="ColorRect" type="ColorRect" parent="GameCamera/HeadsUpDisplay"]
+visible = false
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -182,6 +185,13 @@ layout_mode = 2
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 autowrap_mode = 2
+
+[node name="TypeSoundEffect" type="AudioStreamPlayer2D" parent="GameCamera/HeadsUpDisplay"]
+stream = ExtResource("12_kvuet")
+script = ExtResource("13_trtic")
+min_pitch_scale = 0.5
+max_pitch_scale = 0.7
+metadata/_custom_type_script = "uid://epioxgcm5jlk"
 
 [connection signal="is_pressed_changed" from="BackgroundObjects/Button1" to="YSorted/YSortedObjects/Gate1" method="_on_button_is_pressed_changed"]
 [connection signal="is_pressed_changed" from="BackgroundObjects/Button2_1" to="YSorted/YSortedObjects/Gate2" method="_on_button_is_pressed_changed"]
