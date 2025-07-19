@@ -2,6 +2,7 @@ class_name HeadsUpDisplay
 extends Control
 
 @export var player: Player
+@export var text_display_seconds := 3.0
 
 @export var full_health_icon: Texture
 @export var half_health_icon: Texture
@@ -25,7 +26,7 @@ var text: String:
 		label.text = ""
 		_typing_queue = value
 		label_container.visible = true
-		await get_tree().create_timer(3.0).timeout
+		await get_tree().create_timer(text_display_seconds).timeout
 		label_container.visible = false
 
 

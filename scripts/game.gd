@@ -3,15 +3,19 @@ extends Node2D
 
 const TILE_SIZE_PIXELS: int = 16
 
+@onready var player: Player = $YSorted/Player
 @onready var boulder: Boulder = $YSorted/Boulder
 @onready var camera: GameCamera = $GameCamera
 @onready var heads_up_display: HeadsUpDisplay = $GameCamera/HeadsUpDisplay
 
 
 func _ready() -> void:
-	await get_tree().create_timer(4.0).timeout
+	player.process_mode = Node.PROCESS_MODE_DISABLED
+	await get_tree().create_timer(4.0).timeout # wait for boulder to roll down
 	heads_up_display.text = "Zeus: Sisyphus, you cheat!
 	  Enjoy your rock."
+	await get_tree().create_timer(heads_up_display.text_display_seconds).timeout
+	player.process_mode = Node.PROCESS_MODE_INHERIT
 
 
 func _on_boulder_state_changed(previous_state: Boulder.State, _current_state: Boulder.State) -> void:
