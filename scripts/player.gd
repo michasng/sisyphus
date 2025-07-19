@@ -38,13 +38,18 @@ var state_timer_seconds := 0.0
 @export var stamina_recharge_per_second := 1.0
 @export var push_stamina_consumption_per_second := 0.5
 @export var sprint_stamina_consumption_per_second := 0.5
-@export var hurt_invicibility_seconds := 1.0
 @export var punch_seconds := 0.5
 
 var health: float = max_health
 var stamina: float = max_stamina
 
-@onready var _hurt_box: Area2D = $HurtBox
+@export var hurt_flash_active: bool:
+	get:
+		return (self.material as ShaderMaterial).get_shader_parameter("active")
+	set(value):
+		(self.material as ShaderMaterial).set_shader_parameter("active", value)
+
+@onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 @onready var _hit_box_by_direction: Dictionary[Vector2i, Area2D] = {
 	Vector2i.UP: $Punch/UpHitBox,
@@ -153,10 +158,9 @@ func _hurt(damage: float) -> void:
 	_hurt_sound_effect.resume()
 	hurt.emit()
 
-	# set_deferred, because hurt_box.monitoring is locked during signal
-	_hurt_box.set_deferred("monitoring", false)
-	await get_tree().create_timer(hurt_invicibility_seconds).timeout
-	_hurt_box.monitoring = true
+	# Must call_deferred, because the animation disables hurt_box.monitoring,
+	# which is locked in this signal callback.
+	_animation_player.call_deferred("play", "hurt")
 
 
 func _on_hurt_box_body_entered(_body: Node2D) -> void:
