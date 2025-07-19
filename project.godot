@@ -28,6 +28,7 @@ window/stretch/scale_mode="integer"
 
 folder_colors={
 "res://resources/": "blue",
+"res://resources/fonts/": "pink",
 "res://resources/sounds/": "orange",
 "res://resources/textures/": "green",
 "res://scenes/": "yellow",

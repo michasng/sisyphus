@@ -5,6 +5,12 @@ const TILE_SIZE_PIXELS: int = 16
 
 @onready var boulder: Boulder = $YSorted/Boulder
 @onready var camera: GameCamera = $GameCamera
+@onready var heads_up_display: HeadsUpDisplay = $GameCamera/HeadsUpDisplay
+
+
+func _ready() -> void:
+	heads_up_display.text = "Zeus: Sisyphus, you cheat!
+	  Enjoy your rock."
 
 
 func _on_boulder_state_changed(previous_state: Boulder.State, _current_state: Boulder.State) -> void:

@@ -1,3 +1,4 @@
+class_name HeadsUpDisplay
 extends Control
 
 @export var player: Player
@@ -10,8 +11,19 @@ extends Control
 @export var half_stamina_icon: Texture
 @export var empty_stamina_icon: Texture
 
-@onready var health_container: Container = $HealthContainer
-@onready var stamina_container: Container = $StaminaContainer
+@export var label_container: Control
+@export var label: Label
+@export var health_container: Container
+@export var stamina_container: Container
+
+var text: String:
+	get:
+		return label.text
+	set(value):
+		label.text = value
+		label_container.visible = true
+		await get_tree().create_timer(2.0).timeout
+		label_container.visible = false
 
 
 func _ready() -> void:
