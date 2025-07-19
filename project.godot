@@ -89,6 +89,7 @@ punch={
 2d_physics/layer_3="path"
 2d_physics/layer_4="enemy_hit"
 2d_physics/layer_5="player_hit"
+2d_physics/layer_6="player"
 
 [rendering]
 

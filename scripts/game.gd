@@ -22,3 +22,7 @@ func _on_boulder_state_changed(previous_state: Boulder.State, _current_state: Bo
 
 func _on_player_hurt() -> void:
 	camera.shake(0.5, 0.2)
+
+
+func _on_sign_read(text: Variant) -> void:
+	heads_up_display.text = text
