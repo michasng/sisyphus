@@ -18,3 +18,7 @@ func _physics_process(_delta: float) -> void:
 	var direction = global_position.direction_to(target.global_position)
 	velocity = direction * velocity_pixels_per_second
 	move_and_slide()
+
+
+func _on_hurt_box_area_entered(_area: Area2D) -> void:
+	queue_free()

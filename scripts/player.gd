@@ -22,8 +22,12 @@ var state_timer_seconds := 0.0
 			if value == State.PUNCH:
 				_punch_sound_effect.resume()
 				_hit_box_by_direction[view_direction].monitorable = true
+				_hit_box_by_direction[view_direction].visible = true
 			if state == State.PUNCH:
-				_hit_box_by_direction[view_direction].monitorable = false
+				# disable all, because the view_dirction might have changed
+				for direction in _hit_box_by_direction:
+					_hit_box_by_direction[direction].monitorable = false
+					_hit_box_by_direction[direction].visible = false
 		state = value
 
 @export var view_direction: Vector2i = Vector2i.DOWN

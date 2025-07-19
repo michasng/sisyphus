@@ -254,7 +254,7 @@ radius = 5.0
 radius = 6.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ur7pv"]
-size = Vector2(8, 8)
+size = Vector2(12, 12)
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
@@ -298,36 +298,44 @@ collision_mask = 2
 [node name="Punch" type="Node2D" parent="."]
 
 [node name="UpHitBox" type="Area2D" parent="Punch"]
+visible = false
 position = Vector2(0, -8)
 collision_layer = 16
 collision_mask = 0
+monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch/UpHitBox"]
 shape = SubResource("RectangleShape2D_ur7pv")
 
 [node name="DownHitBox" type="Area2D" parent="Punch"]
+visible = false
 position = Vector2(0, 8)
 collision_layer = 16
 collision_mask = 0
+monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch/DownHitBox"]
 shape = SubResource("RectangleShape2D_ur7pv")
 
 [node name="LeftHitBox" type="Area2D" parent="Punch"]
+visible = false
 position = Vector2(-8, 0)
 collision_layer = 16
 collision_mask = 0
+monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch/LeftHitBox"]
 shape = SubResource("RectangleShape2D_ur7pv")
 
 [node name="RightHitBox" type="Area2D" parent="Punch"]
+visible = false
 position = Vector2(8, 0)
 collision_layer = 16
 collision_mask = 0
+monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Punch/RightHitBox"]
