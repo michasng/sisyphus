@@ -113,6 +113,7 @@ motion_mode = 1
 script = ExtResource("1_ss3tx")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.196078)
 texture = SubResource("AtlasTexture_ss3tx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
