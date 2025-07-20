@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwuqxmlxmry48"]
+[gd_scene load_steps=8 format=3 uid="uid://bwuqxmlxmry48"]
 
 [ext_resource type="Script" uid="uid://dta3c8lvdcqmv" path="res://scripts/sign.gd" id="1_8yyji"]
 [ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://resources/textures/tileset.png" id="2_ge2pc"]
@@ -7,6 +7,10 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_pnnkw"]
 atlas = ExtResource("2_ge2pc")
 region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yyji"]
+atlas = ExtResource("2_ge2pc")
+region = Rect2(96, 48, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4irdt"]
 size = Vector2(16, 4)
@@ -17,8 +21,12 @@ radius = 16.0
 [node name="Sign" type="StaticBody2D"]
 script = ExtResource("1_8yyji")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="SpriteOnGrass" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_pnnkw")
+
+[node name="SpriteOnDirt" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("AtlasTexture_8yyji")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)

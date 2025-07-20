@@ -2,10 +2,18 @@ class_name Sign
 extends StaticBody2D
 
 @export var text: String
+@export var is_on_dirt := false
 
+@onready var _sprite_on_grass: Sprite2D = $SpriteOnGrass
+@onready var _sprite_on_dirt: Sprite2D = $SpriteOnDirt
 @onready var _read_hint: Node = $ColorRect
 
 signal read(text)
+
+
+func _ready() -> void:
+	_sprite_on_grass.visible = not is_on_dirt
+	_sprite_on_dirt.visible = is_on_dirt
 
 
 func _input(event: InputEvent) -> void:
