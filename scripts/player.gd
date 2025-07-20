@@ -152,7 +152,7 @@ func _hurt(damage: float) -> void:
 	health -= damage
 	if health <= 0:
 		# call_deferred, because collision objects mustn't be removed in physics frame
-		get_tree().call_deferred("reload_current_scene")
+		(get_tree().root.get_child(0) as Root).call_deferred("restart_game")
 		return
 
 	_hurt_sound_effect.resume()

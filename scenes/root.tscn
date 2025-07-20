@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx6uyj26fm3tn"]
+
+[ext_resource type="Script" uid="uid://bfejmqhwx52fj" path="res://scripts/root.gd" id="1_lrqlo"]
+[ext_resource type="AudioStream" uid="uid://bhabc7n0nb7w5" path="res://resources/music/title.wav" id="2_lrqlo"]
+[ext_resource type="PackedScene" uid="uid://8o82gpbp86ea" path="res://scenes/title.tscn" id="3_lrqlo"]
+[ext_resource type="AudioStream" uid="uid://dexvhvflpregb" path="res://resources/music/game.wav" id="3_sqa0i"]
+
+[node name="Root" type="Node2D"]
+script = ExtResource("1_lrqlo")
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lrqlo")
+volume_db = -10.0
+autoplay = true
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_sqa0i")
+volume_db = -10.0
+
+[node name="Title" parent="." instance=ExtResource("3_lrqlo")]
+
+[connection signal="finished" from="TitleMusic" to="." method="_on_title_music_finished"]
+[connection signal="finished" from="GameMusic" to="." method="_on_game_music_finished"]
