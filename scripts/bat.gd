@@ -52,4 +52,5 @@ func _on_animation_looped() -> void:
 
 
 func _on_button_sensor_area_entered(_area: Area2D) -> void:
-	target = null # stop moving
+	target = null
+	is_following_target = false
