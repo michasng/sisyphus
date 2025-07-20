@@ -24,7 +24,6 @@ var state_timer_seconds := 0.0
 @export var max_roll_velocity_pixels_per_second := 3.5 * Game.TILE_SIZE_PIXELS
 @export var idle_to_roll_duration_seconds := 2.0
 @export var acceleration_seconds := 5.0
-@export var stop_roll_y := 0.0
 
 @onready var acceleration_pixels_per_second_squared := max_roll_velocity_pixels_per_second / acceleration_seconds
 @onready var _no_roll_area: Area2D = $NoRollArea2D
@@ -47,8 +46,7 @@ func _transition_states() -> void:
 		state = State.PUSH
 		return
 	
-	var is_blocked = _no_roll_area.get_overlapping_bodies().any(func(body): return body != self)
-	var should_stop_roll := is_blocked or position.y >= stop_roll_y
+	var should_stop_roll = _no_roll_area.get_overlapping_bodies().any(func(body): return body != self)
 	match state:
 		State.IDLE:
 			if should_stop_roll:
