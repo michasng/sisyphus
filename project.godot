@@ -11,8 +11,10 @@ config_version=5
 [application]
 
 config/name="Sisyphus"
-run/main_scene="uid://un81rc8dqj2"
+run/main_scene="uid://8o82gpbp86ea"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/use_filter=false
+boot_splash/image="uid://dfmjy1il2dkla"
 config/icon="uid://badvcn06a66e6"
 
 [display]
