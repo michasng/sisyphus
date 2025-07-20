@@ -2,16 +2,25 @@ class_name Root
 extends Node2D
 
 @onready var title: Title = $Title
+var intro: Intro
 var game: Game
 
 @onready var title_music: AudioStreamPlayer = $TitleMusic
 @onready var game_music: AudioStreamPlayer = $GameMusic
 
 
-func start_game() -> void:
-	game = _create_game()
+func go_to_intro() -> void:
+	var scene: PackedScene = load("res://scenes/intro.tscn")
+	intro = scene.instantiate()
 	title.queue_free()
 	title = null
+	add_child(intro)
+
+
+func start_game() -> void:
+	game = _create_game()
+	intro.queue_free()
+	intro = null
 	add_child(game)
 
 
