@@ -88,16 +88,18 @@ func _handle_physics(delta: float) -> void:
 				)
 			)
 
-	# Only test for collisions instead of letting Godot handle them,
-	# or else other bodies can push this one.
+	# move_and_slide had this body being pushed by accident.
 	# Unlike move_and_slide, delta needs to be applied
 	# and velocity needs to be updated manually.
-	var collided = move_and_collide(velocity * delta, true) != null
-	if collided:
+	# The boulder can still be nudged slightly,
+	# but only testing for collisions and setting velocity to ZERO on collision
+	# caused the boulder to get stuck on corners, due to its spherical shape.
+	var position_before = position
+	var collision = move_and_collide(velocity * delta)
+	velocity = (position - position_before) / delta
+
+	if collision != null:
 		state = State.PUSH
-		velocity = Vector2.ZERO
-	else:
-		position += velocity * delta
 
 	if velocity.length() > Game.TILE_SIZE_PIXELS * 0.2:
 		var velocity_fraction = velocity.length() / max_roll_velocity_pixels_per_second
