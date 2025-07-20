@@ -12,8 +12,7 @@ const TILE_SIZE_PIXELS: int = 16
 func _ready() -> void:
 	player.process_mode = Node.PROCESS_MODE_DISABLED
 	await get_tree().create_timer(4.0).timeout # wait for boulder to roll down
-	heads_up_display.text = "Zeus: Sisyphus, you cheat!
-	  Enjoy your rock."
+	heads_up_display.text = "Zeus: Sisyphus, you cheat!\n      Enjoy your rock."
 	await get_tree().create_timer(heads_up_display.text_display_seconds).timeout
 	player.process_mode = Node.PROCESS_MODE_INHERIT
 
@@ -30,3 +29,12 @@ func _on_player_hurt() -> void:
 
 func _on_sign_read(text: Variant) -> void:
 	heads_up_display.text = text
+
+
+func _on_mountain_top_body_entered(body: Node2D) -> void:
+	if body == boulder:
+		heads_up_display.text = "Zeus: Congratulations Sisyphus!\n      You can start right over, lol."
+		await get_tree().create_timer(heads_up_display.text_display_seconds).timeout
+		(get_tree().root.get_child(0) as Root).restart_game()
+	else:
+		heads_up_display.text = "Zeus: Looks like you're a few rocks short of a full boulder."
