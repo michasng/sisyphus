@@ -49,3 +49,7 @@ func _on_hurt_box_area_entered(_area: Area2D) -> void:
 func _on_animation_looped() -> void:
 	if is_following_target:
 		_flap_sound_effect.resume()
+
+
+func _on_button_sensor_area_entered(_area: Area2D) -> void:
+	target = null # stop moving

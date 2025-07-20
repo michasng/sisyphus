@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bhnwn34ic1p7i"]
+[gd_scene load_steps=21 format=3 uid="uid://bhnwn34ic1p7i"]
 
 [ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://resources/textures/tileset.png" id="1_cnldk"]
 [ext_resource type="Script" uid="uid://ckkaba5lxt65b" path="res://scripts/bat.gd" id="1_ss3tx"]
@@ -63,6 +63,21 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_67y1s"]
 radius = 6.0
 
+[sub_resource type="Animation" id="Animation_x4bhu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -10)]
+}
+
 [sub_resource type="Animation" id="Animation_8qtcx"]
 resource_name = "die"
 length = 0.2
@@ -80,21 +95,6 @@ tracks/0/keys = {
 "values": [Vector2(0, -10), Vector2(0, -12), Vector2(0, -4)]
 }
 
-[sub_resource type="Animation" id="Animation_x4bhu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -10)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k0o7o"]
 _data = {
 &"RESET": SubResource("Animation_x4bhu"),
@@ -103,6 +103,9 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ss3tx"]
 radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8qtcx"]
+radius = 6.0
 
 [node name="Bat" type="CharacterBody2D"]
 collision_layer = 9
@@ -146,5 +149,14 @@ volume_db = -10.0
 script = ExtResource("6_8qtcx")
 metadata/_custom_type_script = "uid://epioxgcm5jlk"
 
+[node name="ButtonSensor" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonSensor"]
+shape = SubResource("CircleShape2D_8qtcx")
+
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animation_looped"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="area_entered" from="ButtonSensor" to="." method="_on_button_sensor_area_entered"]
