@@ -33,7 +33,7 @@ func _on_sign_read(text: Variant) -> void:
 
 func _on_mountain_top_body_entered(body: Node2D) -> void:
 	if body == boulder:
-		heads_up_display.text = "Zeus: Congratulations Sisyphus!\n      You can start right over, lol."
+		heads_up_display.text = "Zeus: I hope you're happy, Sisyphus.\n      Now start right over, lol."
 		await get_tree().create_timer(heads_up_display.text_display_seconds).timeout
 		(get_tree().root.get_child(0) as Root).restart_game()
 	else:
