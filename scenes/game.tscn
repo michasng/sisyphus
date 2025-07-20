@@ -177,6 +177,7 @@ grow_vertical = 2
 theme = ExtResource("9_kvpfn")
 script = ExtResource("6_u5sy4")
 player = NodePath("../../YSorted/Player")
+text_display_seconds = 5.0
 full_health_icon = SubResource("AtlasTexture_vtaks")
 half_health_icon = SubResource("AtlasTexture_kvpfn")
 empty_health_icon = SubResource("AtlasTexture_dinhu")
