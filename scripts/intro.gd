@@ -1,16 +1,14 @@
 class_name Intro
 extends Node2D
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-var can_skip := false
+@onready var _skip_label: Label = $ColorRect/SkipLabel
 
 
 func _ready() -> void:
 	await get_tree().create_timer(3.0).timeout
-	can_skip = true
-	animation_player.play("label_flash")
+	_skip_label.visible = true
 
 
 func _input(event: InputEvent) -> void:
-	if can_skip and event is InputEventKey or InputEventJoypadButton and event.is_pressed():
+	if _skip_label.visible and event is InputEventKey or InputEventJoypadButton and event.is_pressed():
 		(get_parent() as Root).start_game()

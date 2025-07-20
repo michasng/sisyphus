@@ -36,7 +36,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Label:visible")
+tracks/0/path = NodePath("SkipLabel:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -53,7 +53,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Label:visible")
+tracks/0/path = NodePath("SkipLabel:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -82,7 +82,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_hiwto")
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="SkipLabel" type="Label" parent="."]
 visible = false
 offset_left = -29.0
 offset_top = 32.0
