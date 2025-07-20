@@ -9,6 +9,7 @@ extends StaticBody2D
 @onready var _read_hint: Node = $ColorRect
 
 signal read(text)
+signal stop_reading(text)
 
 
 func _ready() -> void:
@@ -34,3 +35,4 @@ func _on_read_area_2d_body_entered(_body: Node2D) -> void:
 
 func _on_read_area_2d_body_exited(_body: Node2D) -> void:
 	_read_hint.visible = false
+	stop_reading.emit(text)

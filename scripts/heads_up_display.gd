@@ -25,9 +25,12 @@ var text: String:
 	set(value):
 		label.text = ""
 		_typing_queue = value
-		label_container.visible = true
-		await get_tree().create_timer(text_display_seconds).timeout
-		label_container.visible = false
+		if value.is_empty():
+			label_container.visible = false
+		else:
+			label_container.visible = true
+			await get_tree().create_timer(text_display_seconds).timeout
+			label_container.visible = false
 
 
 func _ready() -> void:

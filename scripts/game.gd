@@ -31,6 +31,10 @@ func _on_sign_read(text: Variant) -> void:
 	heads_up_display.text = text
 
 
+func _on_sign_stop_reading(_text: Variant) -> void:
+	heads_up_display.text = ""
+
+
 func _on_mountain_top_body_entered(body: Node2D) -> void:
 	if body == boulder:
 		player.process_mode = Node.PROCESS_MODE_DISABLED
