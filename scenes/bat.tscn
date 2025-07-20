@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhnwn34ic1p7i"]
+[gd_scene load_steps=15 format=3 uid="uid://bhnwn34ic1p7i"]
 
 [ext_resource type="Texture2D" uid="uid://b55rm7vq2qmh4" path="res://resources/textures/tileset.png" id="1_cnldk"]
 [ext_resource type="Script" uid="uid://ckkaba5lxt65b" path="res://scripts/bat.gd" id="1_ss3tx"]
 [ext_resource type="Texture2D" uid="uid://blbe0a6g2flxm" path="res://resources/textures/bat.png" id="2_48wkk"]
 [ext_resource type="Script" uid="uid://d4av31qwk7qca" path="res://scripts/bat_sprite.gd" id="3_48wkk"]
+[ext_resource type="AudioStream" uid="uid://ch8iooi7gl5jq" path="res://resources/sounds/bat_flap.wav" id="5_5fn3r"]
+[ext_resource type="Script" uid="uid://epioxgcm5jlk" path="res://scripts/sound_effect.gd" id="6_8qtcx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ss3tx"]
 atlas = ExtResource("1_cnldk")
@@ -75,4 +77,11 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_ss3tx")
 
+[node name="FlapSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_5fn3r")
+volume_db = -10.0
+script = ExtResource("6_8qtcx")
+metadata/_custom_type_script = "uid://epioxgcm5jlk"
+
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animation_looped"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
