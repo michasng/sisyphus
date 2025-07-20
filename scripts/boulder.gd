@@ -27,6 +27,7 @@ var state_timer_seconds := 0.0
 @export var stop_roll_y := 0.0
 
 @onready var acceleration_pixels_per_second_squared := max_roll_velocity_pixels_per_second / acceleration_seconds
+@onready var _no_roll_area: Area2D = $NoRollArea2D
 @onready var _move_particles: GPUParticles2D = $MoveParticles
 @onready var _move_sound_effect: SoundEffect = $MoveSoundEffect
 @onready var stop_sound_effect: SoundEffect = $StopSoundEffect
@@ -46,7 +47,8 @@ func _transition_states() -> void:
 		state = State.PUSH
 		return
 	
-	var should_stop_roll := position.y >= stop_roll_y
+	var is_blocked = _no_roll_area.get_overlapping_bodies().any(func(body): return body != self)
+	var should_stop_roll := is_blocked or position.y >= stop_roll_y
 	match state:
 		State.IDLE:
 			if should_stop_roll:
