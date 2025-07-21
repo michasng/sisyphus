@@ -95,7 +95,7 @@ state = 2
 y_sort_enabled = true
 
 [node name="Bat" parent="YSorted/Enemies" node_paths=PackedStringArray("target") instance=ExtResource("6_kvpfn")]
-position = Vector2(0, -458)
+position = Vector2(0, -488)
 target = NodePath("../../Player")
 
 [node name="Bat2" parent="YSorted/Enemies" node_paths=PackedStringArray("target") instance=ExtResource("6_kvpfn")]
@@ -145,7 +145,7 @@ position = Vector2(0, -336)
 required_buttons_pressed_count = 2
 
 [node name="SignPunch" parent="YSorted/YSortedObjects" instance=ExtResource("7_trtic")]
-position = Vector2(-40, -376)
+position = Vector2(0, -408)
 text = "Press SPACE or the LEFT CONTROLLER ACTION to punch."
 
 [node name="Gate3" parent="YSorted/YSortedObjects" instance=ExtResource("5_0tnpc")]
